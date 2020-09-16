@@ -1,0 +1,21 @@
+/* Anderson Cardoso Gonçalves - github.com/ansoncg */
+
+#ifndef PILHA_H
+#define PILHA_H
+
+#include <stddef.h>
+#include <stdbool.h>
+#include "../Comum/definicoes.h"
+#include "../Lista/lista.h"
+
+typedef struct pilha Pilha;
+
+Erro pilha_cria(Pilha **p, size_t dadoTam, bool repeticao, dado_copia funcCopia, dado_libera funcLibera, dado_compara funcCompara);
+Erro pilha_entra(Pilha *p, void *dado);
+Erro pilha_sai(Pilha *p);
+Erro pilha_pegaProx(Pilha *p, void **dadoRetorno, bool memoriaNova); 
+Erro pilha_itera(Pilha *p, dado_usa funcao); 
+Erro pilha_destroi(Pilha **p);
+Erro pilha_pegaTam(Pilha *p, int *pilhaTam);
+
+#endif
