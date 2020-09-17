@@ -19,12 +19,12 @@ Erro pilha_cria(Pilha **p, size_t dadoTam, bool repeticao, dado_copia funcCopia,
 }
 
 /* Insere dado generico na pilha. */
-Erro pilha_entra(Pilha *p, void *dado) {
+Erro pilha_insere(Pilha *p, void *dado) {
    return lista_insereIni(p->lista, dado);
 }
 
 /* Remove o proximo dado da pilha. */
-Erro pilha_sai(Pilha *p) {
+Erro pilha_remove(Pilha *p) {
    return lista_removeIni(p->lista);
 }
 

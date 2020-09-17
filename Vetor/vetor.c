@@ -2,8 +2,9 @@
 #include <string.h>
 #include "vetor.h"
 
-/* TODO: Botar erros, comparações, comentarios, arrumar caso alguem acesse uma posição alta, criar a opção de iterar até certo dado, Getters.*/
+/* TODO: Botar erros, comentarios, arrumar caso alguem acesse uma posição alta, criar a opção de iterar até certo dado, Getters.*/
 
+// Vetor de ponteiros void. Apenas um vetor de void não funciona, não tem como saber o tamanho.
 struct vetor {
    void **elementos;
    size_t tamanho, capacidade, dadoTam;
@@ -31,7 +32,7 @@ void vetor_aumentaCap(Vetor *vet) {
 
 /* Funcionalidades. */
 
-Erro vetor_entra(Vetor *vet, const void *dado, size_t pos) {
+Erro vetor_insere(Vetor *vet, const void *dado, size_t pos) {
    if (!vetor_cabe(vet, pos))
       vetor_aumentaCap(vet);
    if (vet->funcCopia == NULL)
@@ -70,12 +71,12 @@ Erro vetor_cria(Vetor **vet, size_t dadoTam, dado_copia funcCopia, dado_libera f
    return 0;
 }
 
-Erro vetor_entraFim(Vetor *vet, void *dado) {
-   vetor_entra(vet, dado, vet->tamanho); 
+Erro vetor_insereFim(Vetor *vet, void *dado) {
+   vetor_insere(vet, dado, vet->tamanho); 
    return 0;
 }
 
-Erro vetor_saiFim(Vetor *vet) {
+Erro vetor_removeFim(Vetor *vet) {
    vet->tamanho--;
    return 0;
 }
@@ -88,7 +89,7 @@ Erro vetor_esvazia(Vetor *vet) {
 // Melhorar
 Erro vetor_copia(Vetor *vetDest, Vetor *vetOrig) {
    for (size_t i = 0; i < vetOrig->tamanho; i++)
-      vetor_entra(vetDest, vetOrig->elementos[i], i);
+      vetor_insere(vetDest, vetOrig->elementos[i], i);
    return 0;
 }
 
@@ -113,17 +114,17 @@ Erro vetor_itera(Vetor *vet, dado_usa funcao) {
 Erro vetor_comparaPos(Vetor *vet, size_t posUm, size_t posDois, int *resultado) {
    if (vet->funcCompara == NULL)
       *resultado = strcmp(vet->elementos[posUm], vet->elementos[posDois]);
-   else
-      *resultado = vet->funcCompara(vet->elementos[posUm], vet->elementos[posDois]);
+   else // Pegando endereço para poder usar a mesma função de cmp usada no ordena, (**).
+      *resultado = vet->funcCompara(&vet->elementos[posUm], &vet->elementos[posDois]);
    return 0;
 }
 
-/*
+// Lembrar que é um vetor de ponteiros de void. A função de compara
+// precisa castar para ** e desreferenciar duas vezes -> Ex: **(int **) 
 Erro vetor_ordena(Vetor *vet) {
-   // Implementar quicksort  
+   qsort(vet->elementos, vet->tamanho, sizeof(void *), vet->funcCompara);
    return 0;
 }
-*/
 
 Erro vetor_pegaTamanho(Vetor *vet, int *vetTam) {
    *vetTam = vet->tamanho;
@@ -134,3 +135,4 @@ Erro vetor_pegaDadoTam(Vetor *vet, int *dadoTam) {
    *dadoTam = vet->dadoTam; 
    return 0;
 }
+

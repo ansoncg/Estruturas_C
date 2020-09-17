@@ -19,12 +19,12 @@ Erro fila_cria(Fila **f, size_t dadoTam, bool repeticao, dado_copia funcCopia, d
 }
 
 /* Insere dado generico na fila. */
-Erro fila_entra(Fila *f, void *dado) {
+Erro fila_insere(Fila *f, void *dado) {
    return lista_insereFim(f->lista, dado);
 }
 
 /* Remove o proximo dado da fila. */
-Erro fila_sai(Fila *f) {
+Erro fila_remove(Fila *f) {
    return lista_removeIni(f->lista);
 }
 
