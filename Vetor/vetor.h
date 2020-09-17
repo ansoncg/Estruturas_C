@@ -19,6 +19,7 @@ Erro vetor_itera(Vetor *vet, dado_usa funcao);
 Erro vetor_saiFim(Vetor *vet); 
 Erro vetor_copia(Vetor *vetDest, Vetor *vetOrig); 
 Erro vetor_esvazia(Vetor *vet); 
+Erro vetor_ordena(Vetor *vet); 
 
 Erro vetor_pegaTamanho(Vetor *vet, int *vetTam); 
 Erro vetor_pegaDadoTam(Vetor *vet, int *dadoTam); 

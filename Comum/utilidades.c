@@ -6,47 +6,7 @@
 #include "utilidades.h"
 
 
-//--------------------------------------------------------------------------------------------
-
-/* Struct de string que varia de tamanho para uso nas estruturas. */
-
-struct stringVariavel {
-   char *str;
-};
-
-char* strVar_pegaStr(StringVar *sv) {
-   return sv->str;
-}
-
-void strVar_imprime(void *dado) {
-   printf("%s ", ((StringVar *) dado)->str);
-   return;
-}
-
-void strVar_libera(void *dado) {
-   if (dado != NULL)
-      free(((StringVar *) dado)->str);
-   return;
-}
-
-void strVar_copia(void *dest, const void *orig) {
-   memcpy(dest, orig, sizeof(StringVar));
-   ((StringVar *) dest)->str = malloc(strlen(((StringVar *) orig)->str) + 1);
-   strcpy(((StringVar *) dest)->str, ((StringVar *) orig)->str);
-   return;
-}
-
-int strVar_compara(const void *dadoUm, const void *dadoDois) {
-   return strcmp(((StringVar *) dadoUm)->str, ((StringVar *) dadoDois)->str);
-}
-
-size_t strVar_tam() {
-   return sizeof(StringVar);
-}
- 
-//--------------------------------------------------------------------------------------------
-
-/* Le uma string de tamanho indeterminado de 
+/* Le uma string comum de tamanho indeterminado de 
  * uma stream. */
 char *leString(FILE *entrada) {
    int strTam = 32, i = 0;
@@ -63,8 +23,6 @@ char *leString(FILE *entrada) {
    string = realloc(string, i + 1);
    return string;
 }
-
-//--------------------------------------------------------------------------------------------
 
 /* Funções para serem usadas no iterador. */
 
@@ -153,6 +111,9 @@ void checaErro(Erro saidaFunc) {
          break;
       case 9:
          fprintf(stderr, "Numero da gaveta invalido\n");
+         break;
+      case 10:
+         fprintf(stderr, "Estrutura nao inicializada, abortando\n");
          break;
    }
 }

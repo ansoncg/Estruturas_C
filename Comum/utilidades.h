@@ -7,15 +7,6 @@
 #include <stddef.h>
 #include "definicoes.h"
 
-// Fazer um TAD de StringVar
-typedef struct stringVariavel StringVar; 
-void strVar_imprime(void *dado); 
-void strVar_libera(void *dado); 
-void strVar_copia(void *dest, const void *orig); 
-int strVar_compara(const void *dadoUm, const void *dadoDois); 
-char* strVar_pegaStr(StringVar *sv); 
-size_t strVar_tam(); 
-
 char *leString(FILE *entrada); 
 
 void imprimeChar(void *dado); 

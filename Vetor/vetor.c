@@ -118,6 +118,13 @@ Erro vetor_comparaPos(Vetor *vet, size_t posUm, size_t posDois, int *resultado) 
    return 0;
 }
 
+/*
+Erro vetor_ordena(Vetor *vet) {
+   // Implementar quicksort  
+   return 0;
+}
+*/
+
 Erro vetor_pegaTamanho(Vetor *vet, int *vetTam) {
    *vetTam = vet->tamanho;
    return 0;
