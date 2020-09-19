@@ -26,6 +26,7 @@ Erro strVar_imprimeV(const StringVar *sv);
 size_t strVar_dadoTam();  
 void strVar_dadoCopia(void *dest, const void *orig); 
 int strVar_dadoCompara(const void *dadoUm, const void *dadoDois); 
+int strVar_dadoComparaVet(const void *dadoUm, const void *dadoDois); 
 void strVar_dadoLibera(void *dado); 
 void strVar_dadoImprime(void *dado); 
 void strVar_dadoImprimeV(void *dado); 

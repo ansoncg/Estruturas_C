@@ -31,6 +31,8 @@
   
  * Obs: Cabem 2^(8*sizeof(int)-1) elementos na lista. */
 
+//TODO: Colocar const no parametro do criarNo, tirar memcpy necessario das funcoes de copia
+
 #include <string.h>
 #include <stdlib.h>
 #include "lista.h"

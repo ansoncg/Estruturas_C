@@ -20,8 +20,10 @@ Erro vetor_copia(Vetor *vetDest, Vetor *vetOrig);
 Erro vetor_esvazia(Vetor *vet); 
 Erro vetor_ordena(Vetor *vet); 
 Erro vetor_comparaPos(Vetor *vet, size_t posUm, size_t posDois, int *resultado); 
+Erro vetor_inicializa(Vetor *vet, void *dadoInicializador, size_t tamFinal); 
 
 Erro vetor_pegaTamanho(Vetor *vet, int *vetTam); 
 Erro vetor_pegaDadoTam(Vetor *vet, int *dadoTam); 
+Erro vetor_temBuraco(Vetor *vet, bool *retorno); 
 
 #endif 

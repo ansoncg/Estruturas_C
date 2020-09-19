@@ -130,9 +130,12 @@ int strVar_dadoCompara(const void *dadoUm, const void *dadoDois) {
    return strcmp(((StringVar *) dadoUm)->str, ((StringVar *) dadoDois)->str);
 }
 
+int strVar_dadoComparaVet(const void *dadoUm, const void *dadoDois) {
+   return strcmp((*(StringVar **) dadoUm)->str, (*(StringVar **) dadoDois)->str);
+}
+
 void strVar_dadoLibera(void *dado) {
-   if (dado != NULL)
-      free(((StringVar *) dado)->str);
+   free(((StringVar *) dado)->str);
    return;
 }
 
