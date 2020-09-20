@@ -1,6 +1,10 @@
-TAD do StringVar, colocar todas operações de string
-TAD seq, usa uma StringVar, fazer um wrapper das funções + operaçoes de sequencia
+Heap
+Ver TODO lista
+Fazer um enum para os erros com nomes descritivos
 Funções para converter Lista <-> Vetor em um outro arquivo fora das utilidades
-Melhorar TAD Vetor
 Algoritmos de grafo
-Resto das TAD
+Resto das estruturas: Hash, arvore rubro negra, grafo matriz adj, ...?
+Versão de tudo usando macros em vez de void. Um dia.
+
+Bioinfo:
+TAD seq, usa uma StringVar, fazer um wrapper das funções + operaçoes de sequencia

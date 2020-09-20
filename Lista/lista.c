@@ -3,6 +3,7 @@
 /* Lista com as seguintes caracteristicas:
  * - Dados genericos
  * - Apenas um tipo de dado para lista toda, a não ser que use outro ponteiro que varie dentro do dado
+ * - Deep copy dos dados
  * - Duplamente encadeada
  * - Circular
  * - Com sentinela que aponta para nós sob controle do usuario ("gavetas")
@@ -14,7 +15,7 @@
    A numeração das gavetas para o uso em funções é: gavetaUm - 1, gavetaDois - 2, ambas - 3.
    Funções de remoção de nós no inicio, fim e ordenada esvaziam as gavetas. A função de remoção
    do nó dentro da gaveta coloca o próximo nó dentro da gaveta depois da remoção. Funções de inserção
-   atualizam a nova posição númerica do nó dentro da gaveta se necessário.
+   atualizam a nova posição numérica do nó dentro da gaveta se necessário.
 
  * Funções de copia, liberação e comparação são necessarias apenas para dados complexos, ou seja, uma
    struct com ponteiros dentro. 
