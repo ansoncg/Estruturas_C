@@ -3,7 +3,7 @@
 #ifndef DEFINICOES_H
 #define DEFINICOES_H
 
-/* - Toda funcionalidade externa de uma estrutura retorna um valor tipo Erro. Retorno 0 é sucesso. 
+/* - Toda funcionalidade externa de uma estrutura retorna um valor tipo Erro. Retorno 0 é sucesso. Getters não precisam.
  * - Toda funcionalidade começa com o nome da estrutura antes. Ex: lista_destroi().
  * - Nos nomes das variaveis, caracteristicas que as diferenciam vem depois do tipo. Ex: dadoUm, dadoNovo.
  * - As estruturas sempre terão partes de mesmo tamanho. Porém é possivel usar ponteiros para regiões que variam de tamanho. */

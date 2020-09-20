@@ -2,24 +2,28 @@
 #include <string.h>
 #include "vetor.h"
 
-/* TODO: Botar erros, comentarios, arrumar caso alguem acesse uma posição alta, criar a opção de iterar até certo dado, Getters.*/
+/* TODO: Botar erros, comentarios, criar a opção de iterar até certo dado, Getters.*/
 
 /* Dificuldades da implementação de um vetor generico sem usar macros:
  *    - Não tem como criar apenas um vetor "void *elementos", não tem como dividir pois não se sabe o tamanho,
- *    portanto é necessario um vetor de ponteiros void "void **elementos" o que torna a memoria dos dados
+ *    portanto é necessario um vetor de ponteiros void o que torna a memoria dos dados
  *    não consecutiva, criando alguns problemas.
- *    - Existe a necessidade de fazer todas as alocações para tipos complexos com calloc, apostando que o 0 será NULL, o que
- *    não necessariamente é verdade. Isso é preciso para saber quando a função de liberação do usuario deve agir ou ignorar o
- *    dado. Outra solução seria guardar a informação de quais indices do vetor tem ponteiros apontando para dados complexos. 
  *
  * Esse problemas acarretam em:
  *    - A função de comparação passada pelo usuario terá que entender que o dado é um ponteiro duplo. 
  *    É um problema contornavel se fizer um ordernar que não usar qsort(). 
- *    - A função de liberação de memoria do usuario com um dado complexo terá que checar se o dado não é nulo.
+ *    - Não tem como usar tirar proveito de funções que levam em conta memoria consecutiva, deixando a
+ *    implementação menos efeciente.
+ *    - Quando um dado complexo entra em uma posição do vetor já alocada é necessario desalocar
+ *    com a função do usario antes pois não se sabe o tamanho do novo dado. Ex: Tinha uma string que foi
+ *    usada malloc(5) mas a nova string precisa de malloc(10).
+ *
  */
 
+// Se declarar a struct nessa ordem dá para usar o qsort com uma função de comparar que desreferencia duas vezes (**).
+// Garantido pela implementação do C, a ordem dos dados é a mesma e não há padding antes do primeiro campo.
 typedef struct _elemento {
-   void *dado; // Se declarar a struct nessa ordem dá para usar o qsort com uma função de comparar que desreferencia duas vezes (**).
+   void *dado;
    bool alocado;
 } Vetor_No;
 
@@ -30,6 +34,8 @@ struct vetor {
    dado_libera funcLibera;
    dado_compara funcCompara;
 };
+
+/* Funções auxiliares. */
 
 bool vetor_cabe(Vetor *vet, size_t pos) {
    return vet->capacidade > pos;
@@ -105,10 +111,14 @@ Erro vetor_esvazia(Vetor *vet) {
    return 0;
 }
 
-// Melhorar
-Erro vetor_copia(Vetor *vetDest, Vetor *vetOrig) {
+Erro vetor_copia(Vetor *vetDest, const Vetor *vetOrig) {
+   if (vetDest == NULL || vetOrig == NULL)
+      return 10;
+   vetor_destroi(&vetDest);
+   vetor_cria(&vetDest, vetOrig->dadoTam, vetOrig->funcCopia, vetOrig->funcLibera, vetOrig->funcCompara);
    for (size_t i = 0; i < vetOrig->tamanho; i++)
-      vetor_insere(vetDest, vetOrig->vetDados[i].dado, i);
+      if (vetOrig->vetDados[i].alocado)
+         vetor_insere(vetDest, vetOrig->vetDados[i].dado, i);
    return 0;
 }
 
@@ -147,7 +157,7 @@ Erro vetor_comparaPos(Vetor *vet, size_t posUm, size_t posDois, int *resultado) 
    return 0;
 }
 
-// Enquanto não faço meu proprio sort
+// Enquanto não faço meu proprio sort a funCompara terá que castar ponteiro duplo.
 Erro vetor_ordena(Vetor *vet) {
    if (vet->funcCompara != NULL)
       qsort(vet->vetDados, vet->tamanho, sizeof(Vetor_No), vet->funcCompara);
@@ -168,13 +178,13 @@ Erro vetor_inicializa(Vetor *vet, void *dadoInicializador, size_t tamFinal) {
    return 0;
 }
 
-Erro vetor_pegaTamanho(Vetor *vet, int *vetTam) {
-   *vetTam = vet->tamanho;
-   return 0;
+// Getters do vetor.
+
+size_t vetor_pegaTamanho(Vetor *vet) {
+   return vet->tamanho;
 }
 
-Erro vetor_pegaDadoTam(Vetor *vet, int *dadoTam) {
-   *dadoTam = vet->dadoTam; 
-   return 0;
+size_t vetor_pegaDadoTam(Vetor *vet) {
+   return vet->dadoTam;
 }
 
