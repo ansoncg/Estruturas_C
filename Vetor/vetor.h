@@ -23,6 +23,7 @@ Erro vetor_ordena(Vetor *vet);
 Erro vetor_comparaPos(Vetor *vet, size_t posUm, size_t posDois, int *resultado); 
 Erro vetor_inicializa(Vetor *vet, void *dadoInicializador, size_t tamFinal); 
 Erro vetor_temBuraco(Vetor *vet, bool *retorno); 
+Erro vetor_trocaPos(Vetor *vet, size_t posUm, size_t posDois); 
 
 // Getters
 size_t vetor_pegaTamanho(Vetor *vet); 

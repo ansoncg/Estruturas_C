@@ -78,8 +78,8 @@ Erro vetor_retorna(Vetor *vet, void **dadoRetorno, size_t pos, bool memoriaNova)
       else
          vet->funcCopia(*dadoRetorno, (vet->vetDados[pos].dado));
    }
-   else 
-      *dadoRetorno = vet->vetDados[pos].dado;
+   else  
+      (*dadoRetorno) = vet->vetDados[pos].dado;
    return 0;
 }
 
@@ -153,7 +153,14 @@ Erro vetor_comparaPos(Vetor *vet, size_t posUm, size_t posDois, int *resultado) 
    if (vet->funcCompara == NULL)
       *resultado = memcmp(vet->vetDados[posUm].dado, vet->vetDados[posDois].dado, vet->dadoTam);
    else
-      *resultado = vet->funcCompara(&vet->vetDados[posUm].dado, &vet->vetDados[posDois].dado);
+      *resultado = vet->funcCompara(vet->vetDados[posUm].dado, vet->vetDados[posDois].dado);
+   return 0;
+}
+
+Erro vetor_trocaPos(Vetor *vet, size_t posUm, size_t posDois) {
+   void *guarda = vet->vetDados[posUm].dado;
+   vet->vetDados[posUm].dado = vet->vetDados[posDois].dado;
+   vet->vetDados[posDois].dado = guarda;
    return 0;
 }
 
