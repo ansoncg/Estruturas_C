@@ -61,6 +61,7 @@ Erro heap_destroi(Heap **h) {
    *h = NULL;
    return 0;
 }
+
 Erro heap_insere(Heap *h, void *dado) {
    size_t i = vetor_pegaTamanho(h->vetor); 
    int comparador;
