@@ -39,8 +39,8 @@ Erro fila_itera(Fila *f, dado_usa funcao) {
 }
 
 /* Devolve o tamanho da fila. */
-Erro fila_pegaTam(Fila *f, int *filaTam) {
-   return lista_pegaTam(f->lista, filaTam);
+int fila_pegaTam(Fila *f) {
+   return lista_pegaTam(f->lista);
 }
 
 /* Libera toda a memória da fila. */

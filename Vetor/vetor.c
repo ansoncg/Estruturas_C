@@ -37,11 +37,11 @@ struct vetor {
 
 /* Funções auxiliares. */
 
-bool vetor_cabe(Vetor *vet, size_t pos) {
+static bool vetor_cabe(Vetor *vet, size_t pos) {
    return vet->capacidade > pos;
 }
 
-void vetor_aumentaCap(Vetor *vet, size_t capDesejada) {
+static void vetor_aumentaCap(Vetor *vet, size_t capDesejada) {
    size_t capAtual = vet->capacidade;
    size_t multiplicador = (capDesejada / capAtual) + 1;
    vet->vetDados = realloc(vet->vetDados, multiplicador*capAtual*sizeof(Vetor_No));

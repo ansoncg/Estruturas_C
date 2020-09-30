@@ -32,8 +32,6 @@
   
  * Obs: Cabem 2^(8*sizeof(int)-1) elementos na lista. */
 
-//TODO: Colocar const no parametro do criarNo, tirar memcpy necessario das funcoes de copia
-
 #include <string.h>
 #include <stdlib.h>
 #include "lista.h"
@@ -76,7 +74,7 @@ struct lista {
 /* Aloca memória para 'noNovo' e insere 'dadoNovo' nele.
  * Parametros: Novo nó, novo dado, lista.
  * Erros: Nenhum.  */
-void lista_criaNo(Lista_No **noNovo, void *dadoNovo, Lista *l) {
+static void lista_criaNo(Lista_No **noNovo, const void *dadoNovo, Lista *l) {
    (*noNovo) = malloc(sizeof(Lista_No));
    (*noNovo)->dado = malloc(l->dadoTam);
    if (l->funcCopia == NULL)
@@ -90,7 +88,7 @@ void lista_criaNo(Lista_No **noNovo, void *dadoNovo, Lista *l) {
 /* Cria um sentinela com seu dado especifico.
  * Parametros: Sentinela da lista, tamanho do dado da lista.
  * Erros: Nenhum. */
-void lista_IniciaSentinela(Lista_No **sentinela) {
+static void lista_IniciaSentinela(Lista_No **sentinela) {
    (*sentinela) = malloc(sizeof(Lista_No));
    (*sentinela)->dado = malloc(sizeof(Lista_sentDado));
    ((Lista_sentDado *) ((*sentinela)->dado))->gavetaUm = *sentinela;
@@ -104,7 +102,7 @@ void lista_IniciaSentinela(Lista_No **sentinela) {
 /* Guarda um nó qualquer nas gavetas. 
  * Parametros: Lista, opção de gaveta, nó que vai entrar.
  * Erros: 9. */
-Erro lista_entraGaveta(Lista *l, char gavetaQual, Lista_No *noEntra) {
+static Erro lista_entraGaveta(Lista *l, char gavetaQual, Lista_No *noEntra) {
    switch (gavetaQual) {
       case 1:
          ((Lista_sentDado *) (l->sentinela->dado))->gavetaUm = noEntra;
@@ -125,7 +123,7 @@ Erro lista_entraGaveta(Lista *l, char gavetaQual, Lista_No *noEntra) {
 /* Atualiza a posição e ponteiro da gaveta na movimentação proximo ou anteior.
  * Parametros: Lista, ponteiro do nó dentro da gaveta, posição do no dentro da gaveta, direção que andou.
  * Erros: Nenhum. */
-void lista_atualizaGaveta(Lista *l, Lista_No **noGuardado, int *gavetaPos, bool direcao) {
+static void lista_atualizaGaveta(Lista *l, Lista_No **noGuardado, int *gavetaPos, bool direcao) {
    if (noGuardado == NULL)
       return;
    if (direcao) {
@@ -148,7 +146,7 @@ void lista_atualizaGaveta(Lista *l, Lista_No **noGuardado, int *gavetaPos, bool 
 /* Corrige o número da posição na gaveta ao ocorrer remoção/inserção.
  * Parametros: Lista, posição da rm/ins, se foi inserção ou remoção.
  * Erros: Nenhum. */
-void lista_arrumaPosGaveta(Lista *l, int pos, bool insercao) {
+static void lista_arrumaPosGaveta(Lista *l, int pos, bool insercao) {
    int posUm = ((Lista_sentDado *) l->sentinela->dado)->posUm;
    int posDois = ((Lista_sentDado *) l->sentinela->dado)->posDois;
    int atualiza = insercao ? 1 : -1;
@@ -163,14 +161,14 @@ void lista_arrumaPosGaveta(Lista *l, int pos, bool insercao) {
 /* Diz se a fila está vazia.
  * Parametros: Lista.
  * Erros: Nenhum. */
-int lista_estaVazia(Lista *l) {
+static int lista_estaVazia(Lista *l) {
    return (!(l->listaTam));
 }
 
 /* Insere um novo nó contendo 'dado' na lista 'l'.
  * Parametros: Lista, nó anterior ao inserido, no posterior ao inserido, novo dado.
  * Erros: Nenhum. */
-void lista_insereNo(Lista *l, Lista_No *noAntes, Lista_No *noDepois, void *dado) {
+static void lista_insereNo(Lista *l, Lista_No *noAntes, Lista_No *noDepois, void *dado) {
    Lista_No *noNovo = NULL;
 
    lista_criaNo(&noNovo, dado, l);
@@ -185,7 +183,7 @@ void lista_insereNo(Lista *l, Lista_No *noAntes, Lista_No *noDepois, void *dado)
 /* Remove um nó 'noDeleta' da lista 'l'.
  * Parametros: Lista, nó anterior ao removido, no a ser removido, no posterior ao removido.
  * Erros: Nenhum. */
-void lista_removeNo(Lista *l, Lista_No *noAntes, Lista_No *noDeleta, Lista_No *noDepois) {
+static void lista_removeNo(Lista *l, Lista_No *noAntes, Lista_No *noDeleta, Lista_No *noDepois) {
    noAntes->prox = noDepois;
    noDepois->ant = noAntes;
    if (l->funcLibera != NULL)
@@ -199,7 +197,7 @@ void lista_removeNo(Lista *l, Lista_No *noAntes, Lista_No *noDeleta, Lista_No *n
 /* Testa se 'dado' já pertence a lista 'l'.
  * Parametros: Lista, dado generico.
  * Erros: 1. */
-Erro lista_veSeRepete(Lista *l, void *dado) {
+static Erro lista_veSeRepete(Lista *l, void *dado) {
    int conta = l->listaTam;
    Lista_No *percorre = l->sentinela->prox;
    
@@ -670,37 +668,19 @@ Erro lista_iteraAninhado(Lista *l, dado_usa funFora, dado_aninhado funDentro) {
 
 /* Getters da lista. */
 
-Erro lista_pegaTam(Lista *l, int *listaTam) {
-   *listaTam = l->listaTam;
-   return 0;
+int lista_pegaTam(Lista *l) {
+   return l->listaTam;
 }
 
-Erro lista_pegaDadoTam(Lista *l, size_t *dadoTam) {
-   *dadoTam = l->dadoTam;
-   return 0;
+size_t lista_pegaDadoTam(Lista *l) {
+   return l->dadoTam;
 }
 
-Erro lista_pegaehOrdenada(Lista *l, bool *ordenada) {
-   *ordenada = l->ordenada;
-   return 0;
+bool lista_pegaehOrdenada(Lista *l) {
+   return l->ordenada;
 }
 
-Erro lista_pegaRepetida(Lista *l, bool *repeticao) {
-   *repeticao = l->repeticao;
-   return 0;
+bool lista_pegaRepetida(Lista *l) {
+   return l->repeticao;
 }
 
-Erro lista_pegaCopia(Lista *l, void **funcCopia) {
-   *funcCopia = l->funcCopia;
-   return 0;
-}
-
-Erro lista_pegaLibera(Lista *l, void **funcLibera) {
-   *funcLibera = l->funcLibera;
-   return 0;
-}
-
-Erro lista_pegaComp(Lista *l, void **funcCompara) {
-   *funcCompara = l->funcCompara;
-   return 0;
-}

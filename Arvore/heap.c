@@ -9,19 +9,19 @@ struct heap {
 
 /* Funções auxiliares. */
 
-size_t heap_pai(size_t posNo) {
+static size_t heap_pai(size_t posNo) {
    return (posNo - 1) / 2;
 }
 
-size_t heap_filhoDir(size_t posNo) {
+static size_t heap_filhoDir(size_t posNo) {
    return (2*posNo + 1);
 }
 
-size_t heap_filhoEsq(size_t posNo) {
+static size_t heap_filhoEsq(size_t posNo) {
    return (2*posNo + 2);
 }
 
-void heap_tornarHeap(Heap *h, size_t posNo) {
+static void heap_tornarHeap(Heap *h, size_t posNo) {
    size_t esquerda = heap_filhoEsq(posNo);
    size_t direita = heap_filhoDir(posNo);
    size_t menor = posNo, tamanho = vetor_pegaTamanho(h->vetor);

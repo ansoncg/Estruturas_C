@@ -39,8 +39,8 @@ Erro pilha_itera(Pilha *p, dado_usa funcao) {
 }
 
 /* Devolve o tamanho da pilha. */
-Erro pilha_pegaTam(Pilha *p, int *pilhaTam) {
-   return lista_pegaTam(p->lista, pilhaTam);
+int pilha_pegaTam(Pilha *p) {
+   return lista_pegaTam(p->lista);
 }
 
 /* Libera toda a memória da pilha. */

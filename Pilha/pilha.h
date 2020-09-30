@@ -16,6 +16,6 @@ Erro pilha_remove(Pilha *p);
 Erro pilha_pegaProx(Pilha *p, void **dadoRetorno, bool memoriaNova); 
 Erro pilha_itera(Pilha *p, dado_usa funcao); 
 Erro pilha_destroi(Pilha **p);
-Erro pilha_pegaTam(Pilha *p, int *pilhaTam);
+int pilha_pegaTam(Pilha *p); 
 
 #endif

@@ -46,12 +46,9 @@ Erro lista_pegaGaveta(Lista *l, void **dadoRetorno, char gavetaQual);
 Erro lista_pegaGavetaPos(Lista *l, int *gavetaPos, char gavetaQual); 
 
 /* Getters da lista. */
-Erro lista_pegaTam(Lista *l, int *listaTam); 
-Erro lista_pegaDadoTam(Lista *l, size_t *dadoTam); 
-Erro lista_pegaOrdenada(Lista *l, bool *ordenada); 
-Erro lista_pegaRepetida(Lista *l, bool *repeticao); 
-Erro lista_pegaCopia(Lista *l, void **funcCopia); 
-Erro lista_pegaLibera(Lista *l, void **funcLibera);
-Erro lista_pegaComp(Lista *l, void **funcCompara); 
+int lista_pegaTam(Lista *l);
+size_t lista_pegaDadoTam(Lista *l);
+bool lista_pegaehOrdenada(Lista *l);
+bool lista_pegaRepetida(Lista *l);
 
 #endif

@@ -9,10 +9,10 @@
 /* Le uma string comum de tamanho indeterminado de 
  * uma stream. */
 char *leString(FILE *entrada) {
-   int strTam = 32, i = 0;
+   size_t strTam = 32, i = 0;
    char *string = malloc(strTam), c;
 
-   while (((c = getc(entrada)) != '\n') && c != EOF) {
+   while (((c = (char) getc(entrada)) != '\n') && c != EOF) {
       if (i == strTam) {
          strTam *= 2;
          string = realloc(string, strTam);

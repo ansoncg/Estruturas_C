@@ -40,7 +40,7 @@ struct grafoLA {
 
 /* Funções auxiliares. */
 
-void gLA_liberaNaLista(void *dado) {
+static void gLA_liberaNaLista(void *dado) {
    if (*(((gLA_valDado *) dado)->desaloca)) {
       free(((gLA_valDado *) dado)->arestaValor);
       free(((gLA_valDado *) dado)->desaloca);
@@ -50,22 +50,22 @@ void gLA_liberaNaLista(void *dado) {
    return; 
 }
 
-int gLA_comparaNaLista(const void *dadoUm, const void *dadoDois) {
+static int gLA_comparaNaLista(const void *dadoUm, const void *dadoDois) {
    int vertUm = ((gLA_valDado *) dadoUm)->vertice,
        vertDois = ((gLA_valDado *) dadoDois)->vertice;
    return (vertUm < vertDois) ? -1 : (vertUm > vertDois);
 }
 
-void* grafoLA_pegaDadoImp(void *gLA_val) {
+static void* grafoLA_pegaDadoImp(void *gLA_val) {
    printf("%d-", ((gLA_valDado *) gLA_val)->vertice);
    return (((gLA_valDado *) gLA_val)->arestaValor);
 }
 
-void* grafoLA_pegaDado(void *gLA_val) {
+static void* grafoLA_pegaDado(void *gLA_val) {
    return (((gLA_valDado *) gLA_val)->arestaValor);
 }
 
-void grafoLA_novoVal(GrafoLA *gLA, int vertice, void *valor, gLA_valDado *novoVal) {
+static void grafoLA_novoVal(GrafoLA *gLA, int vertice, void *valor, gLA_valDado *novoVal) {
    (novoVal)->vertice = vertice;
    (novoVal)->arestaValor = malloc(gLA->val_dadoTam); 
    (novoVal)->desaloca = malloc(sizeof(bool));
@@ -160,7 +160,7 @@ Erro grafoLA_destroi(GrafoLA **gLA) {
    // Remove o dado complexo primeiro passando pelo grafo todo.
    if (((*gLA)->valorado) && ((*gLA)->funcLibera != NULL)) { // Dado complexo dentro do valor da aresta.
       for (int i = 0; i < (*gLA)->verticesQuant; i++) {
-         lista_pegaTam((*gLA)->listas[i], &listaTam);
+         listaTam = lista_pegaTam((*gLA)->listas[i]);
          lista_esvaziaGaveta((*gLA)->listas[i], 2);
          while (listaTam--) {
             lista_andaGaveta((*gLA)->listas[i], 2, Proximo); 
