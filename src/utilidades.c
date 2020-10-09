@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "utilidades.h"
+#include "../include/utilidades.h"
 
 
 /* Le uma string comum de tamanho indeterminado de 

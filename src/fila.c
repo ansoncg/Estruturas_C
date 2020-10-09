@@ -1,7 +1,7 @@
 /* Anderson Cardoso Gonçalves - github.com/ansoncg */
 
 #include <stdlib.h>
-#include "fila.h"
+#include "../include/fila.h"
 
 /* Para mais explicações ver TAD lista.
  * Erros de retorno da fila são os mesmos da lista. */

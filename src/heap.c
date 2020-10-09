@@ -1,6 +1,6 @@
 #include <stdlib.h>
-#include "heap.h"
-#include "../Vetor/vetor.h"
+#include "../include/heap.h"
+#include "../include/vetor.h"
 
 struct heap {
    Vetor *vetor;

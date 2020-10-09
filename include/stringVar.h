@@ -5,7 +5,7 @@
 
 #include <stdio.h>
 #include <stddef.h>
-#include "../Comum/definicoes.h"
+#include "definicoes.h"
 
 
 typedef struct stringVariavel StringVar; 

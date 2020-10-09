@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
-#include "stringVar.h"
+#include "../include/stringVar.h"
 
 struct stringVariavel {
    char *str;

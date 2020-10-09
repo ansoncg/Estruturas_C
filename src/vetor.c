@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
-#include "vetor.h"
+#include "../include/vetor.h"
 
 /* TODO: Botar erros, comentarios, criar a opção de iterar até certo dado, Getters.*/
 

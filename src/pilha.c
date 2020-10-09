@@ -1,7 +1,7 @@
 /* Anderson Cardoso Gonçalves - github.com/ansoncg */
 
 #include <stdlib.h>
-#include "pilha.h"
+#include "../include/pilha.h"
 
 /* Para mais explicações ver TAD lista.
  * Erros de retorno da pilha são os mesmos da lista. */

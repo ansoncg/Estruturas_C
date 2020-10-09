@@ -5,7 +5,7 @@
 
 #include <stddef.h>
 #include <stdbool.h>
-#include "../Comum/definicoes.h"
+#include "definicoes.h"
 
 typedef struct grafoLA GrafoLA;
 

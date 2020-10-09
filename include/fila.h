@@ -5,8 +5,8 @@
 
 #include <stddef.h>
 #include <stdbool.h>
-#include "../Comum/definicoes.h"
-#include "../Lista/lista.h"
+#include "definicoes.h"
+#include "lista.h"
 
 typedef struct fila Fila;
 

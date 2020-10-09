@@ -3,9 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../Lista/lista.h"
-#include "../Comum/utilidades.h"
-#include "grafoLA.h"
+#include "../include/lista.h"
+#include "../include/utilidades.h"
+#include "../include/grafoLA.h"
 
 /* Grafo com as seguintes caracteristicas:
  * Listas de adjacencia

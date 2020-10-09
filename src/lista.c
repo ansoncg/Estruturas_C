@@ -34,7 +34,7 @@
 
 #include <string.h>
 #include <stdlib.h>
-#include "lista.h"
+#include "../include/lista.h"
 
 /* Estrutura do nó. */
 typedef struct lista_no {
