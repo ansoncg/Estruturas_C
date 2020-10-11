@@ -6,13 +6,12 @@
 # $< -> Primeiro pre-requisito
 # $^ -> Todos os pre-requisitos
 
-FLAGS_FINAL = -O3 -march=native #-w
+FLAGS_FINAL = -O3 -march=native#-w
 FLAGS_AVISO = -Wall -Wextra -Wconversion -pedantic
-FLAGS_DEBUG = -ggdb3 
+FLAGS_DEBUG = -ggdb3 -O0
 FLAGS_VALGRIND = --leak-check=full --show-leak-kinds=all --track-origins=yes
-FLAGS_SAN = -fsanitize=address #-fsanitize=undefined #-fsanitize=thread 
-FLAGS_LIGA = #-lm
-FLAGS_SUAS = #-fexceptions
+FLAGS_SAN = -fsanitize=address
+FLAGS_LIGA =#-lm
 
 CC = gcc
 
@@ -20,29 +19,43 @@ EXE = programa # Final
 EXE_V = programaV # Valgrind
 EXE_S = programaS # Sanitize
 
-FONTE_ESTR = $(wildcard Estruturas/src/*.c) 
-FONTE_PROG = $(wildcard Teste_Estruturas/*.c) # Pasta do programa aqui
+FONTE_ESTR = $(wildcard Estruturas/src/*.c) # Caminho das estruturas
+FONTE_PROG = $(wildcard Teste_Estruturas/*.c) # Caminho da main
 OBJ = $(FONTE_ESTR:.c=.o) $(FONTE_PROG:.c=.o)
 
-all: $(EXE)
+#--------------
 
-$(EXE): $(OBJ)
-	$(CC) $^ -o $@ $(FLAGS_FINAL)
+# Final
+all: CFLAGS = $(FLAGS_FINAL)
+all: $(EXE) 
 
-run: $(EXE)
+$(EXE): $(OBJ) 
+	$(CC) $(FLAGS_LIGA) $^ -o $@ 
+
+run: all
 	./$(EXE)
 
+#--------------
+
+# Sanitize
+s: CFLAGS = $(FLAGS_AVISO) $(FLAGS_DEBUG) 
 s: $(EXE_S)
-	./$(EXE_S)
+	./$(EXE_S) 
 
 $(EXE_S): $(OBJ)
-	$(CC) $^ -o $@ $(FLAGS_AVISO) $(FLAGS_DEBUG) $(FLAGS_SAN)
+	$(CC) $(FLAGS_SAN) $(FLAGS_LIGA) $^ -o $@ 
 
+#--------------
+
+# Valgrind
+v: CFLAGS = $(FLAGS_AVISO) $(FLAGS_DEBUG) 
 v: $(EXE_V)
 	valgrind $(FLAGS_VALGRIND) ./$(EXE_V)
 
 $(EXE_V): $(OBJ)
-	$(CC) $^ -o $@ $(FLAGS_AVISO) $(FLAGS_DEBUG)
+	$(CC) $(FLAGS_LIGA) $^ -o $@ 
+
+#--------------
 
 clean:
 	rm -f $(OBJ) 

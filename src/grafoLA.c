@@ -81,7 +81,7 @@ static void grafoLA_novoVal(GrafoLA *gLA, int vertice, void *valor, gLA_valDado 
 
 Erro grafoLA_cria(GrafoLA **gLA, int verticesQuant, bool direcionado, bool valorado, bool repeticao, size_t val_dadoTam, dado_copia funcCopia, dado_libera funcLibera, dado_compara funcCompara) {
    (*gLA) = malloc(sizeof(GrafoLA));
-   (*gLA)->listas = malloc(sizeof(Lista *)*verticesQuant);
+   (*gLA)->listas = malloc(sizeof(Lista *)*((size_t) verticesQuant));
    (*gLA)->verticesQuant = verticesQuant;
    (*gLA)->direcionado = direcionado; 
    (*gLA)->valorado = valorado;
