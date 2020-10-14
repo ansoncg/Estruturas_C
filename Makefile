@@ -30,7 +30,7 @@ all: CFLAGS = $(FLAGS_FINAL)
 all: $(EXE) 
 
 $(EXE): $(OBJ) 
-	$(CC) $(FLAGS_LIGA) $^ -o $@ 
+	$(CC) $^ -o $@ $(FLAGS_LIGA) 
 
 run: all
 	./$(EXE)
@@ -43,7 +43,7 @@ s: $(EXE_S)
 	./$(EXE_S) 
 
 $(EXE_S): $(OBJ)
-	$(CC) $(FLAGS_SAN) $(FLAGS_LIGA) $^ -o $@ 
+	$(CC) $(FLAGS_SAN) $^ -o $@ $(FLAGS_LIGA) 
 
 #--------------
 
@@ -53,7 +53,7 @@ v: $(EXE_V)
 	valgrind $(FLAGS_VALGRIND) ./$(EXE_V)
 
 $(EXE_V): $(OBJ)
-	$(CC) $(FLAGS_LIGA) $^ -o $@ 
+	$(CC) $^ -o $@ $(FLAGS_LIGA)
 
 #--------------
 
