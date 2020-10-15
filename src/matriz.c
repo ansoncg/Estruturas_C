@@ -8,28 +8,26 @@
 struct matriz {
    Vetor *vetor;
    int *tamanhos;
-   int dimensoes;
-   size_t tamanhoTotal;
+   size_t dimensoes, tamanhoTotal;
 };
 
-Erro matriz_cria(Matriz **mat, size_t dadoTam, dado_copia funcCopia, dado_libera funcLibera, dado_compara funcCompara, int dimensoes, ...) {
-   size_t tamanhoTotal = 1;
+Erro matriz_cria(Matriz **mat, size_t dadoTam, dado_copia funcCopia, dado_libera funcLibera, dado_compara funcCompara, size_t dimensoes, ...) {
+   int tamanhoTotal = 1;
    va_list varLista;
 
    va_start(varLista, dimensoes);
    *mat = malloc(sizeof(Matriz));
    (*mat)->tamanhos = malloc(sizeof(int)*dimensoes);
    (*mat)->dimensoes = dimensoes;
-   for (int i = 0; i < dimensoes; i++)  {
+   for (size_t i = 0; i < dimensoes; i++)  
       tamanhoTotal *= (*mat)->tamanhos[i] = va_arg(varLista, int); 
-   }
-   (*mat)->tamanhoTotal = tamanhoTotal;
+   (*mat)->tamanhoTotal = (size_t) tamanhoTotal;
    vetor_cria(&((*mat)->vetor), dadoTam, funcCopia, funcLibera, funcCompara);  
    va_end(varLista);
    return 0;
 }
 
-Erro matriz_insere(Matriz *mat, void *dado, int dimensoes, ...) {
+Erro matriz_insere(Matriz *mat, void *dado, size_t dimensoes, ...) {
    size_t posVetor = 0;
    int multiplicador = 1;
    va_list varLista; 
@@ -37,19 +35,19 @@ Erro matriz_insere(Matriz *mat, void *dado, int dimensoes, ...) {
    if (dimensoes != mat->dimensoes)
      return 11; 
    va_start(varLista, dimensoes);
-   for (int i = 0; i < dimensoes - 1; i++) 
+   for (size_t i = 0; i < dimensoes - 1; i++) 
       multiplicador *= mat->tamanhos[i];
-   for (int i = 0; i < dimensoes - 1; i++) {
-      posVetor += multiplicador*va_arg(varLista, int);
+   for (size_t i = 0; i < dimensoes - 1; i++) {
+      posVetor += (size_t) (multiplicador*va_arg(varLista, int));
       multiplicador /= mat->tamanhos[i];
    }
-   posVetor += va_arg(varLista, int);
+   posVetor += (size_t) va_arg(varLista, int);
    vetor_insere(mat->vetor, dado, posVetor);  
    va_end(varLista);
    return 0;
 }
 
-Erro matriz_retorna(Matriz *mat, void **dadoRetorno, bool memoriaNova, int dimensoes, ...) {
+Erro matriz_retorna(Matriz *mat, void **dadoRetorno, bool memoriaNova, size_t dimensoes, ...) {
    size_t posVetor = 0;
    int multiplicador = 1;
    va_list varLista; 
@@ -57,13 +55,13 @@ Erro matriz_retorna(Matriz *mat, void **dadoRetorno, bool memoriaNova, int dimen
    if (dimensoes != mat->dimensoes)
      return 11; 
    va_start(varLista, dimensoes);
-   for (int i = 0; i < dimensoes - 1; i++) 
+   for (size_t i = 0; i < dimensoes - 1; i++) 
       multiplicador *= mat->tamanhos[i];
-   for (int i = 0; i < dimensoes - 1; i++) {
-      posVetor += multiplicador*va_arg(varLista, int);
+   for (size_t i = 0; i < dimensoes - 1; i++) {
+      posVetor += (size_t) (multiplicador*va_arg(varLista, int));
       multiplicador /= mat->tamanhos[i];
    }
-   posVetor += va_arg(varLista, int); 
+   posVetor += (size_t) va_arg(varLista, int); 
    vetor_retorna(mat->vetor, dadoRetorno, posVetor, memoriaNova);
    va_end(varLista);
    return 0;

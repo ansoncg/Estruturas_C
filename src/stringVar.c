@@ -77,7 +77,7 @@ Erro strVar_compara(const StringVar *svUm, const StringVar *svDois, int *resulta
 }
 
 Erro strVar_le(FILE *entrada, StringVar **sv) {
-   int strTam = 32, i = 0;
+   size_t strTam = 32, i = 0;
    char c;
 
    if (*sv == NULL) 
@@ -85,7 +85,7 @@ Erro strVar_le(FILE *entrada, StringVar **sv) {
    else 
       free ((*sv)->str);
    (*sv)->str = malloc(strTam);
-   while (((c = getc(entrada)) != '\n') && c != EOF) {
+   while (((c = (char) getc(entrada)) != '\n') && c != EOF) {
       if (i == strTam) {
          strTam *= 2;
          (*sv)->str = realloc((*sv)->str, strTam);
