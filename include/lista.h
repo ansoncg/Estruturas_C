@@ -16,14 +16,14 @@ Erro lista_cria(Lista **l, size_t dadoTam, bool ordenada, bool repeticao, dado_c
 Erro lista_destroi(Lista **l); 
 
 /* Inserções. */
-Erro lista_insereIni(Lista *l, void *dado); 
-Erro lista_insereFim(Lista *l, void *dado); 
-Erro lista_insereOrd(Lista *l, void *dado); 
+Erro lista_insereIni(Lista *l, const void *dado); 
+Erro lista_insereFim(Lista *l, const void *dado); 
+Erro lista_insereOrd(Lista *l, const void *dado); 
 
 /* Remoções. */
 Erro lista_removeIni(Lista *l);
 Erro lista_removeFim(Lista *l); 
-Erro lista_removeDado(Lista *l, void *dado, bool todos); 
+Erro lista_removeDado(Lista *l, const void *dado, bool todos); 
 
 /* Passando pela lista. */
 Erro lista_itera(Lista *l, dado_usa funcao); 
@@ -31,7 +31,7 @@ Erro lista_iteraInvert(Lista *l, dado_usa funcao);
 Erro lista_iteraAninhado(Lista *l, dado_usa funFora, dado_aninhado funDentro); 
 
 /* Interagindo com o dado. */
-Erro lista_contemDado(Lista *l, void *dado, int *pos); 
+Erro lista_contemDado(Lista *l, const void *dado, int *pos); 
 Erro lista_pegaDadoIni(Lista *l, void **dadoRetorno, bool memoriaNova);
 Erro lista_pegaDadoFim(Lista *l, void **dadoRetorno, bool memoriaNova); 
 Erro lista_pegaDadoPos(Lista *l, int pos, void **dadoRetorno, bool memoriaNova, char gavetaQual); 

@@ -168,7 +168,7 @@ static int lista_estaVazia(Lista *l) {
 /* Insere um novo nó contendo 'dado' na lista 'l'.
  * Parametros: Lista, nó anterior ao inserido, no posterior ao inserido, novo dado.
  * Erros: Nenhum. */
-static void lista_insereNo(Lista *l, Lista_No *noAntes, Lista_No *noDepois, void *dado) {
+static void lista_insereNo(Lista *l, Lista_No *noAntes, Lista_No *noDepois, const void *dado) {
    Lista_No *noNovo = NULL;
 
    lista_criaNo(&noNovo, dado, l);
@@ -197,7 +197,7 @@ static void lista_removeNo(Lista *l, Lista_No *noAntes, Lista_No *noDeleta, List
 /* Testa se 'dado' já pertence a lista 'l'.
  * Parametros: Lista, dado generico.
  * Erros: 1. */
-static Erro lista_veSeRepete(Lista *l, void *dado) {
+static Erro lista_veSeRepete(Lista *l, const void *dado) {
    int conta = l->listaTam;
    Lista_No *percorre = l->sentinela->prox;
    
@@ -238,7 +238,7 @@ Erro lista_cria(Lista **l, size_t dadoTam, bool ordenada, bool repeticao, dado_c
 /* Insere no inicio da lista. 
  * Parametros: Lista, dado generico.
  * Erros: 1, 2. */
-Erro lista_insereIni(Lista *l, void *dado) {
+Erro lista_insereIni(Lista *l, const void *dado) {
    int erro;
 
    if (l->ordenada)
@@ -253,7 +253,7 @@ Erro lista_insereIni(Lista *l, void *dado) {
 /* Insere no fim da lista. 
  * Parametros: Lista, dado generico.
  * Erros: 1, 2.  */
-Erro lista_insereFim(Lista *l, void *dado) {
+Erro lista_insereFim(Lista *l, const void *dado) {
    int erro;
   
    if (l->ordenada)
@@ -267,7 +267,7 @@ Erro lista_insereFim(Lista *l, void *dado) {
 /* Insere na lista ordenada.
  * Parametros: Lista, dado generico.
  * Erros: 1, 3. */ 
-Erro lista_insereOrd(Lista *l, void *dado) {
+Erro lista_insereOrd(Lista *l, const void *dado) {
    int conta = l->listaTam, comparacao;
    bool repeticao = l->repeticao;
    Lista_No *percorre = l->sentinela->prox;
@@ -316,7 +316,7 @@ Erro lista_removeFim(Lista *l) {
 /* Remove um ou todos os elementos da lista que contem um dado especifico.
  * Parametros: Lista, dado para remover, opção de ser todos.
  * Erros: 5 e 6. */
-Erro lista_removeDado(Lista *l, void *dado, bool todos) {
+Erro lista_removeDado(Lista *l, const void *dado, bool todos) {
    int conta = l->listaTam, removeu = 6, comparacao;
    Lista_No *percorre = l->sentinela->prox;
    Lista_No *deleta = NULL;
@@ -346,7 +346,7 @@ Erro lista_removeDado(Lista *l, void *dado, bool todos) {
 /* Busca se um dado está na lista e devolve sua posição em 'pos'.
  * Parametros: Lista, dado a ser buscado, variavel de retorno.
  * Erros: 6 e 7. */ 
-Erro lista_contemDado(Lista *l, void *dado, int *pos) {
+Erro lista_contemDado(Lista *l, const void *dado, int *pos) {
    int conta = l->listaTam, comparacao;
    bool ordenada = l->ordenada;
    Lista_No *percorre = l->sentinela->prox;

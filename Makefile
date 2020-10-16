@@ -1,3 +1,5 @@
+# Anderson Cardoso Gonçalves - github.com/ansoncg 
+
 # Makefile para ficar fora da pasta de estruturas
 
 # Target: Pre-requitos
@@ -21,7 +23,7 @@ EXE_S = programaS # Sanitize
 
 FONTE_ESTR = $(wildcard Estruturas/src/*.c) # Caminho das estruturas
 FONTE_PROG = $(wildcard Teste_Estruturas/*.c) # Caminho da main
-OBJ = $(FONTE_ESTR:.c=.o) $(FONTE_PROG:.c=.o)
+OBJ = $(FONTE_PROG:.c=.o) $(FONTE_ESTR:.c=.o) 
 
 #--------------
 
