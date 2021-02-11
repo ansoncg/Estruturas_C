@@ -16,6 +16,6 @@ Erro fila_remove(Fila *f);
 Erro fila_pegaProx(Fila *f, void **dadoRetorno, bool memoriaNova); 
 Erro fila_itera(Fila *f, dado_usa funcao); 
 Erro fila_destroi(Fila **f);
-int fila_pegaTam(Fila *f); 
+size_t fila_pegaTam(Fila *f); 
 
 #endif

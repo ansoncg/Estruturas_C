@@ -5,7 +5,7 @@
 
 #include <stddef.h>
 #include <stdbool.h>
-#include "definicoes.h"
+#include "gaveta.h"
 
 typedef struct lista Lista;
 
@@ -27,28 +27,19 @@ Erro lista_removeDado(Lista *l, const void *dado, bool todos);
 
 /* Passando pela lista. */
 Erro lista_itera(Lista *l, dado_usa funcao); 
-Erro lista_iteraInvert(Lista *l, dado_usa funcao); 
-Erro lista_iteraAninhado(Lista *l, dado_usa funFora, dado_aninhado funDentro); 
+Erro lista_iteraInvertido(Lista *l, dado_usa funcao); 
 
 /* Interagindo com o dado. */
-Erro lista_contemDado(Lista *l, const void *dado, int *pos); 
+Erro lista_contemDado(Lista *l, const void *dado, size_t *pos); 
+Erro lista_pegaDadoPos(Lista *l, size_t pos, void **dadoRetorno, bool memoriaNova); 
 Erro lista_pegaDadoIni(Lista *l, void **dadoRetorno, bool memoriaNova);
 Erro lista_pegaDadoFim(Lista *l, void **dadoRetorno, bool memoriaNova); 
-Erro lista_pegaDadoPos(Lista *l, int pos, void **dadoRetorno, bool memoriaNova, char gavetaQual); 
-Erro lista_pegaDado(Lista *l, void *dadoEntrada, void **dadoRetorno, char gavetaQual); 
-
-/* Gavetas no sentinela. */
-Erro lista_esvaziaGaveta(Lista *l, char gavetaQual);  
-Erro lista_rmNoGaveta(Lista *l, char gavetaQual);
-Erro lista_andaGaveta(Lista *l, char gavetaQual, bool direcao);
-Erro lista_igualaGaveta(Lista *l, char gavetaOrg);
-Erro lista_pegaGaveta(Lista *l, void **dadoRetorno, char gavetaQual);
-Erro lista_pegaGavetaPos(Lista *l, int *gavetaPos, char gavetaQual); 
+Erro lista_pegaDado(Lista *l, void *dadoEntrada, void **dadoRetorno); 
 
 /* Getters da lista. */
-int lista_pegaTam(Lista *l);
+size_t lista_pegaTam(Lista *l);
 size_t lista_pegaDadoTam(Lista *l);
-bool lista_pegaehOrdenada(Lista *l);
+bool lista_pegaOrdenada(Lista *l);
 bool lista_pegaRepetida(Lista *l);
 
 #endif

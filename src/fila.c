@@ -39,7 +39,7 @@ Erro fila_itera(Fila *f, dado_usa funcao) {
 }
 
 /* Devolve o tamanho da fila. */
-int fila_pegaTam(Fila *f) {
+size_t fila_pegaTam(Fila *f) {
    return lista_pegaTam(f->lista);
 }
 
@@ -48,6 +48,5 @@ Erro fila_destroi(Fila **f) {
    lista_destroi(&(*f)->lista);
    free (*f);
    *f = NULL;
-   return 0;
+   return SEM_ERRO;
 }
-

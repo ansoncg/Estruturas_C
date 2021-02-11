@@ -7,7 +7,6 @@
 #include <stddef.h>
 #include "definicoes.h"
 
-#define SIMPLES NULL, NULL, NULL
 
 char *leString(FILE *entrada); 
 
@@ -28,6 +27,6 @@ int comparaReal(void *dadoUm, void *dadoDois);
 int comparaRealD(void *dadoUm, void *dadoDois); 
 int comparaString(void *dadoUm, void *dadoDois); 
 
-void erro_checa(Erro saidaFunc); 
+void checaErro(Erro saidaFunc); 
 
 #endif

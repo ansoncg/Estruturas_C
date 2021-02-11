@@ -39,7 +39,7 @@ Erro pilha_itera(Pilha *p, dado_usa funcao) {
 }
 
 /* Devolve o tamanho da pilha. */
-int pilha_pegaTam(Pilha *p) {
+size_t pilha_pegaTam(Pilha *p) {
    return lista_pegaTam(p->lista);
 }
 
@@ -48,6 +48,5 @@ Erro pilha_destroi(Pilha **p) {
    lista_destroi(&(*p)->lista);
    free (*p);
    *p = NULL;
-   return 0;
+   return SEM_ERRO;
 }
-
